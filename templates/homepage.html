@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Homepage</title>
+    {% include 'cdnlines.html' %}
+    <style>
+        @media print {
+            .no-print {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body class="bg-dark">
+<h1 class="text-center border border-primary bg-info">USER DETAILS</h1>
+
+<div class="no-print container" style="margin-top:-20px">
+    <div class="row">
+        <div class="col-md-12">
+            <a href="{% url 'export_to_excel' %}" class="btn btn-outline-primary" style="margin-bottom:-60px">Export to Excel</a>
+            <form class="form-inline mb-1" style="margin-left:825px">
+                <input class="form-control" type="search" placeholder="Search" aria-label="Search" name="query">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            {% if userdata %}
+            <table id="data-table" class="table table-hover">
+                <thead>
+                    <tr class="text-center bg-secondary">
+                        <th>UID</th>
+                        <th>UName</th>
+                        <th>UType</th>
+                        <th>Status</th>
+                        <th>Mobile</th>
+                        <th>Email</th>
+                        <th>Cdatatime</th>
+                    </tr>
+                </thead>
+                <tbody class="jumbotron bg-primary text-white text-center">
+                    {% for i in userdata %}
+                    <tr>
+                        <td>{{ i.UID }}</td>
+                        <td>{{ i.UName }}</td>
+                        <td>{{ i.UType }}</td>
+                        <td>{{ i.Status }}</td>
+                        <td>{{ i.Mobile }}</td>
+                        <td>{{ i.Email }}</td>
+                        <td>{{ i.Cdatatime }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <h2 class="text-center text-white">NO Student Information Available</h2>
+            {% endif %}
+
+            <button onclick="printTable()" class="no-print btn btn-outline-primary" style="margin-top:-20px">Print Table</button>
+
+            <script>
+                function printTable() {
+                    var printContents = document.getElementById('data-table').outerHTML;
+                    var originalContents = document.body.innerHTML;
+                    document.body.innerHTML = printContents;
+                    window.print();
+                    document.body.innerHTML = originalContents;
+                }
+            </script>
+
+            <a href="{% url 'userinfodata' %}" class="no-print btn btn-outline-success" style="margin-top:-20px; margin-left:860px">Add User Details</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

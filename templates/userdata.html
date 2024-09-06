@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Info</title>
+    {% include 'cdnlines.html' %}
+</head>
+<body class="bg-dark">
+<div class="container-fluid">
+    <div class="row">
+        <div class="offset-md-4 col-md-4">
+            <h1 class="text-center border border-primary bg-info">ENTER USER DETAILS</h1>
+            <form method="POST">
+                {% csrf_token %}
+
+<!--                <input type="number" name="UID" class="form-control" placeholder="UID">-->
+                <input type="text" name="UName" class="form-control mt-2" placeholder="Enter User Name">
+                <input type="password" name="Password" class="form-control mt-2" placeholder="Enter Password">
+<!--                <input type="text" name="UType" class="form-control mt-2" placeholder="Enter User Type">-->
+<!--                <label for="UType" class="text-white">UType</label>-->
+                <select id="UType" name="UType" class="form-control mt-2">
+                    <option value="" disabled selected>Select User Type</option>
+                    <option value="OPERATOR">OPERATOR</option>
+                    <option value="ADMIN">ADMIN</option>
+                    <option value="FACULTY">FACULTY</option>
+                </select>
+                <label class="mt-2  text-white">Status</label>
+                <label class="radio-inline text-white ml-4 "><input type="radio" name="Status" value="Active">Active</label>
+                <label class="radio-inline text-white ml-4"><input type="radio" name="Status" value="Deactive">Deactive</label>
+                <input type="number" name="Mobile" class="form-control mt-2" placeholder="Enter Mobile No">
+                <input type="email" name="Email" class="form-control mt-2" placeholder="Enter Email">
+<!--                <input type="datetime-local" name="Cdatatime" value="datetime1" class="form-control mt-2" placeholder="Cdatetime">-->
+                <center>
+                    <input type="submit" value="Save" class="btn btn-success mt-2">
+                    <input type="reset" value="Clear" class="btn btn-danger mt-2">
+                </center>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
